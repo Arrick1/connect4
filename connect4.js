@@ -4,6 +4,7 @@ class Connect4{
         this.COLS = 7;
         this.selector = selector
         this.createGrid()
+        this.setupEventListeners()
     }
 
     createGrid() {
@@ -14,11 +15,32 @@ class Connect4{
         for(let col = 0; col < this.COLS; col++){
             const $col = $('<div>')
                 .addClass('col empty')
+                .attr('data-col', col)
+                .attr('data-row', row)
                 $row.append($col)
-        }   
+         }   
             $board.append($row)
         }
-        console.log($board.html());
+        // console.log($board.html());
+    }
 
+    setupEventListeners() {
+        const $board = $(this.selector);
+
+        function findLastEmptyCell(col){
+            const cells = $(`.col[data-col='${col}']`);
+            console.log(cells);
+
+        }
+
+        $board.on('mouseenter', '.col.empty', function(){
+            const col = $(this).data('col');
+            const $lastEmptyCell = findLastEmptyCell
+            (col);
+            // $lastEmptyCell.addClass(`next-red`)
+            // console.log('here', this)
+            // console.log($lastEmptyCell)
+
+        })
     }
 }
