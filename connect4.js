@@ -29,6 +29,10 @@ class Connect4{
 
         function findLastEmptyCell(col){
             const cells = $(`.col[data-col='${col}']`);
+            for (let i = cells.length - 1; i >= 0; i --) {
+                const $cell = $(cells[i]);
+                return $cell;
+            }
             console.log(cells);
 
         }
@@ -37,9 +41,14 @@ class Connect4{
             const col = $(this).data('col');
             const $lastEmptyCell = findLastEmptyCell
             (col);
-            // $lastEmptyCell.addClass(`next-red`)
+            $lastEmptyCell.addClass(`next-red`);
             // console.log('here', this)
             // console.log($lastEmptyCell)
+
+        })
+
+        $board.on('mouseleave', '.col.empty', function() {
+            $('.col').removeClass(`next-red`);
 
         })
     }

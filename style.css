@@ -8,8 +8,8 @@ body{
 }
 
 .col {
-    min-width: 70px;
-    min-height: 70px;
+    width: 13px !important;
+    height: 13px !important;
     display: inline-block;
     background-color: white;
     border-radius: 50%; 
