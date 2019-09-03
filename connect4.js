@@ -52,7 +52,6 @@ class Connect4{
 
         $board.on('click', '.col.empty', function() {
             const col = $(this).data('col');
-            const row = $(this).data('row'); 
             const $lastEmptyCell = findLastEmptyCell(col);
             $lastEmptyCell.removeClass(`empty next-${that.player}`);
             $lastEmptyCell.addClass(that.player);
@@ -109,14 +108,25 @@ class Connect4{
             }
         }
 
-       function checkVerticals() {
+        function checkDiagonalBLtoTR(){
+            return checkWin({i: 1, j: -1}, {i: 1, j: 1})
+        }
+
+        function checkDiagonalTLtoBR(){
+            return checkWin({i: 1, j: 1}, {i: -1, j: -1})
+        }
+       
+        function checkVerticals() {
            return checkWin({i: -1, j: 0}, {i: 1, j: 0});
        }
 
        function checkHorizontals() {
-        return checkWin({i: -1, j: -1}, {i: 1, j: 1});
-    }
+           return checkWin({i: 0, j: -1}, {i: 0, j: 1});
+        }
 
-       return checkVerticals() || checkHorizontals()
+       return checkVerticals() || 
+            checkHorizontals() || 
+            checkDiagonalBLtoTR() ||
+            checkDiagonalTLtoBR();
    }
 }
